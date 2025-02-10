@@ -85,5 +85,5 @@ document.getElementById('send-message').addEventListener('click', function () {
     // Tự động đóng popup sau 3 giây
     setTimeout(() => {
         document.getElementById('thank-you-popup').style.display = 'none';
-    }, 2000);
+    }, 3000);
 });

@@ -14,7 +14,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50vh;
+    height: 60vh;
 }
 #expression-gif {
     width: 200px;
@@ -83,6 +83,11 @@ button {
     border-radius: 10px;
 }
 
+#gif-container p {
+    color: rgb(250, 64, 172);
+    font-weight: 600;
+}
+
 /* Input và Button */
 .input-container {
     display: flex;
@@ -98,7 +103,6 @@ input {
     border-radius: 8px;
     font-size: 16px;
     text-align: center;
-    width: 333px;
 }
 
 /* Icon xúc xắc 🎲 */

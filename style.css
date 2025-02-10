@@ -1,0 +1,189 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(90deg, #ffafbd, #ffc3a0);
+    padding: 0 10px;
+}
+h1 {
+    margin-top: 50px;
+    color: #ff4d6d;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+#expression-gif {
+    width: 200px;
+    border-radius: 10px;
+}
+.buttons {
+    margin-top: 20px;
+}
+button {
+    font-size: 16px;
+    padding: 12px 24px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+#yes {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    animation: shakeYes 1.5s ease-in-out infinite;
+}
+#yes:hover {
+    transform: scale(1.1);
+}
+#no {
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    color: red;
+    border: 2px solid red;
+}
+#no {
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    color: red;
+    border: 2px solid red;
+}
+#no:hover {
+    transform: scale(1.1);
+}
+@keyframes shakeYes {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+#gif-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+#love-gif {
+    width: 300px;
+    border-radius: 10px;
+}
+
+/* Input và Button */
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #ff66b2;
+    outline: none;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    width: 333px;
+}
+
+/* Icon xúc xắc 🎲 */
+.dice-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-left: 5px;
+}
+
+/* Hiệu ứng khi nhấn */
+.dice-icon:active {
+    transform: rotate(180deg);
+}
+
+/* Animation cho button Gửi 💌 */
+@keyframes buttonClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+button#send-message {
+    background-color: #ff4d6d;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    animation: buttonClick 0.7s ease-in-out infinite;
+}
+
+/* Hover effect */
+button#send-message:hover {
+    background-color: #ff3385;
+    box-shadow: 0 0 10px rgba(255, 102, 178, 0.8);
+}
+
+/* Click effect */
+button#send-message:active {
+    animation: buttonClick 0.2s ease-in-out;
+}
+
+/* Popup nền mờ */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none; /* Ẩn mặc định */
+}
+
+/* Nội dung popup */
+.popup-content {
+    background: linear-gradient(90deg, #ffafbd, #ffc3a0);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

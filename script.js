@@ -29,7 +29,7 @@ noButton.addEventListener('click', function () {
     }
     noClickCount++;
     let screenWidth = window.innerWidth;
-    yesButton.style.fontSize = `${16 + noClickCount * (screenWidth * 0.05)}px`;
+    yesButton.style.fontSize = `${16 + noClickCount * (screenWidth * 0.06)}px`;
 });
 
 yesButton.addEventListener('click', function () {
@@ -77,13 +77,4 @@ const randomQuestions = [
 document.getElementById('dice-icon').addEventListener('click', function () {
     const randomIndex = Math.floor(Math.random() * randomQuestions.length);
     document.getElementById('message').value = randomQuestions[randomIndex];
-});
-
-document.getElementById('send-message').addEventListener('click', function () {
-    document.getElementById('thank-you-popup').style.display = 'flex';
-
-    // Tự động đóng popup sau 3 giây
-    setTimeout(() => {
-        document.getElementById('thank-you-popup').style.display = 'none';
-    }, 3000);
 });

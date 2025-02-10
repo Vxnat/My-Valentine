@@ -113,6 +113,12 @@
             if (message) {
                 saveResponse('Yes', message);
                 document.getElementById('message').value = '';
+                document.getElementById('thank-you-popup').style.display = 'flex';
+
+                // Tự động đóng popup sau 3 giây
+                setTimeout(() => {
+                    document.getElementById('thank-you-popup').style.display = 'none';
+                }, 3000);
             } else {
                 alert('Bạn quên chưa nhập rồi! 💌');
             }

@@ -29,7 +29,7 @@ noButton.addEventListener('click', function () {
     }
     noClickCount++;
     let screenWidth = window.innerWidth;
-    yesButton.style.fontSize = `${16 + noClickCount * (screenWidth * 0.08)}px`;
+    yesButton.style.fontSize = `${16 + noClickCount * (screenWidth * 0.05)}px`;
 });
 
 yesButton.addEventListener('click', function () {
